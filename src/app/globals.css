@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5f5f5; /* Light Gray */
+  --foreground: #121212; /* Dark */
+  
+  --primary: #1b5e20; /* Deep Green */
+  --primary-foreground: #ffffff;
+  
+  --secondary: #2e7d32; /* Tea Green */
+  --secondary-foreground: #ffffff;
+  
+  --accent: #d4af37; /* Gold */
+  --accent-foreground: #121212;
+  
+  --emerald: #43a047;
+  
+  --card: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(255, 255, 255, 0.2);
+  
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: #121212; /* Dark */
+  --foreground: #f5f5f5; /* Light Gray */
+  
+  --primary: #43a047; /* Emerald (lighter for dark mode) */
+  --primary-foreground: #ffffff;
+  
+  --secondary: #2e7d32; /* Tea Green */
+  --secondary-foreground: #ffffff;
+  
+  --accent: #d4af37; /* Gold */
+  --accent-foreground: #121212;
+  
+  --card: rgba(30, 30, 30, 0.7);
+  --card-border: rgba(255, 255, 255, 0.1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-emerald: var(--emerald);
+  
+  --color-card: var(--card);
+  --color-border: var(--card-border);
+  
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  
+  --radius: var(--radius);
+}
+
+@layer base {
+  * {
+    border-color: var(--card-border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+}
+
+.glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.dark .glass-panel {
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.6), rgba(30, 30, 30, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Gradient Background Animation */
+@keyframes gradient-xy {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-xy 15s ease infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
