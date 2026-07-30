@@ -10,25 +10,29 @@ export function TeamSection() {
       name: "Miuranga W.A.R",
       role: "BSc (Hons) Information Technology",
       university: "SLIIT",
-      area: "Labour Management & Welfare Optimization",
+      area: "Tea Leaf Disease Detection & Pattern Analysis",
+      image: "/team/miuranga.png",
     },
     {
       name: "Gunasekara L.M.N.P",
       role: "BSc (Hons) Information Technology",
       university: "SLIIT",
-      area: "Tea Leaf Disease Detection & Pattern Analysis",
+      area: "Labour Management & Welfare Optimization",
+      image: "/team/gunasekara-lmnp.svg",
     },
     {
       name: "Gunasekara G.N.D",
       role: "BSc (Hons) Information Technology",
       university: "SLIIT",
       area: "Tea-Specific Weather & Climate Intelligence System",
+      image: "/team/gunasekara-gnd.svg",
     },
     {
       name: "Pathirana I.M.",
       role: "BSc (Hons) Information Technology",
       university: "SLIIT",
       area: "AI-Based Tea Sorting & Grading Automation",
+      image: "/team/pathirana-im.svg",
     }
   ];
 
@@ -64,8 +68,12 @@ export function TeamSection() {
               {/* Decorative Background for Image */}
               <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-primary/10 to-transparent -z-10" />
               
-              <div className="w-24 h-24 rounded-full bg-primary/20 flex items-center justify-center mb-6 border-4 border-background shadow-md">
-                <User className="w-10 h-10 text-primary" />
+              <div className="w-24 h-24 rounded-full overflow-hidden bg-primary/20 flex items-center justify-center mb-6 border-4 border-background shadow-md">
+                <img
+                  src={member.image}
+                  alt={`${member.name} photo`}
+                  className="w-full h-full object-cover"
+                />
               </div>
               
               <h3 className="font-bold text-lg mb-1">{member.name}</h3>
