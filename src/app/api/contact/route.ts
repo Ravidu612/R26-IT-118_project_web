@@ -1,12 +1,12 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // The email address that will RECEIVE messages from the contact form
 const RECIPIENT_EMAIL = "ravidu612@gmail.com";
 
 export async function POST(request: Request) {
+  // Instantiate inside handler so it only runs at request time, not build time
+  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const { name, email, subject, message } = await request.json();
 
