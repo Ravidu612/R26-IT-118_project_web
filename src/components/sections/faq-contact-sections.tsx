@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ChevronDown, Send, MapPin } from "lucide-react";
+import { ChevronDown, MapPin, Mail, Phone, ExternalLink } from "lucide-react";
 
 export function FAQSection() {
   const faqs = [
@@ -78,40 +78,29 @@ export function FAQSection() {
 }
 
 export function ContactSection() {
-  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-    setErrorMsg("");
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setErrorMsg(data.error || "Something went wrong. Please try again.");
-        setStatus("error");
-      } else {
-        setStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      }
-    } catch {
-      setErrorMsg("Network error. Please check your connection and try again.");
-      setStatus("error");
-    }
-  };
+  const contactDetails = [
+    {
+      icon: Mail,
+      title: "Email Us",
+      value: "ravidu612@gmail.com",
+      link: "mailto:ravidu612@gmail.com",
+      actionText: "Send an Email",
+    },
+    {
+      icon: Phone,
+      title: "Call / WhatsApp",
+      value: "+94 77 052 8901",
+      link: "tel:+94770528901",
+      actionText: "Call Direct",
+    },
+    {
+      icon: MapPin,
+      title: "Research Location",
+      value: "SLIIT Campus, New Kandy Rd, Malabe",
+      link: "https://maps.google.com/?q=SLIIT+Malabe",
+      actionText: "Open in Maps",
+    },
+  ];
 
   return (
     <section id="contact" className="py-24 relative bg-foreground/5">
@@ -128,132 +117,71 @@ export function ContactSection() {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full mb-8" />
           <p className="text-lg text-foreground/70">
-            Have questions about our research? Send us a message.
+            Have questions about our research project or collaboration opportunities? Reach out directly.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          {/* Contact Form */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto items-stretch">
+          {/* Contact Details Cards */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="glass-panel p-8 rounded-2xl"
+            className="lg:col-span-6 flex flex-col justify-between space-y-4"
           >
-            {status === "success" ? (
-              <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary text-3xl">✓</div>
-                <h3 className="text-xl font-bold text-foreground">Message Sent!</h3>
-                <p className="text-foreground/60">Thank you for reaching out. We&apos;ll get back to you soon.</p>
-                <button
-                  onClick={() => setStatus("idle")}
-                  className="mt-2 px-6 py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition-colors text-sm font-medium"
+            {contactDetails.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <a
+                  key={idx}
+                  href={item.link}
+                  target={item.link.startsWith("http") ? "_blank" : undefined}
+                  rel={item.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="glass-panel p-6 rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-300 flex items-center gap-5 group hover:shadow-lg hover:shadow-primary/5"
                 >
-                  Send another message
-                </button>
-              </div>
-            ) : (
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground/80">Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground/80">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground/80">Subject</label>
-                  <input
-                    type="text"
-                    name="subject"
-                    required
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    placeholder="How can we help?"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground/80">Message</label>
-                  <textarea
-                    rows={4}
-                    name="message"
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
-                    placeholder="Your message here..."
-                  />
-                </div>
-
-                {status === "error" && (
-                  <p className="text-red-500 text-sm bg-red-500/10 px-4 py-2 rounded-lg">{errorMsg}</p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="w-full py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-primary/25 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {status === "loading" ? (
-                    <>
-                      <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" /> Send Message
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-inner">
+                    <Icon className="w-7 h-7" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-foreground/50 block mb-1">
+                      {item.title}
+                    </span>
+                    <p className="text-lg font-bold text-foreground truncate group-hover:text-primary transition-colors">
+                      {item.value}
+                    </p>
+                  </div>
+                  <div className="shrink-0 text-foreground/40 group-hover:text-primary group-hover:translate-x-1 transition-all">
+                    <ExternalLink className="w-5 h-5" />
+                  </div>
+                </a>
+              );
+            })}
           </motion.div>
 
-          {/* Map Placeholder */}
+          {/* SLIIT Campus Location Map */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="h-full min-h-[400px] glass rounded-2xl overflow-hidden relative border border-border/50 group"
+            className="lg:col-span-6 h-full min-h-[320px] glass rounded-2xl overflow-hidden relative border border-border/50 group"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 flex flex-col items-center justify-center">
-              <div className="bg-background p-4 rounded-full shadow-lg mb-4 text-primary group-hover:scale-110 transition-transform">
-                <MapPin className="w-8 h-8" />
-              </div>
-              <h3 className="font-bold text-xl mb-2">SLIIT Campus</h3>
-              <p className="text-foreground/70 text-center max-w-[200px]">
-                New Kandy Road, Malabe, Sri Lanka
-              </p>
-
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="glass p-4 rounded-xl text-center backdrop-blur-md bg-background/60">
-                  <span className="text-sm font-medium">Google Maps Placeholder</span>
-                </div>
-              </div>
-            </div>
+            <iframe
+              title="SLIIT Location Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.798467112282!2d79.97075587570415!3d6.914677493084883!2m2!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae256db1a6771c5%3A0x2c63e344ab9a7536!2sSLIIT%20Malabe%20Campus!5e0!3m2!1sen!2slk!4f13.1!4m1!1e1!5e0!3m2!1sen!2slk!4v1700000000000!5m2!1sen!2slk"
+              width="100%"
+              height="100%"
+              style={{ border: 0, filter: "brightness(0.9) contrast(1.1)" }}
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 w-full h-full"
+            />
           </motion.div>
         </div>
       </div>
     </section>
   );
 }
+
