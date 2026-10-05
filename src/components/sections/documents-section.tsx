@@ -6,10 +6,10 @@ import { FileText, Download, Eye } from "lucide-react";
 export function DocumentsSection() {
   const documents = [
     { title: "TAF Report", file: "taf-report.pdf" },
-    { title: "Proposal Document 1", file: "proposal-doc-1.pdf" },
-    { title: "Proposal Document 2", file: "proposal-doc-2.pdf" },
-    { title: "Proposal Document 3", file: "proposal-doc-3.pdf" },
-    { title: "Proposal Document 4", file: "proposal-doc-4.pdf" },
+    { title: "Proposal Document Tea Leaf Disease Detection & Pattern Analysis", file: "proposal-doc-1.pdf" },
+    { title: "Proposal Document Labour Management & Welfare Optimization", file: "proposal-doc-2.pdf" },
+    { title: "Proposal Document Tea-Specific Weather & Climate Intelligence", file: "proposal-doc-3.pdf" },
+    { title: "Proposal Document AI-Based Tea Sorting & Grading Automation", file: "proposal-doc-4.pdf" },
     { title: "Progress Presentation", file: "Progress-presentation-slides.pdf" },
     { title: "Progress Presentation 01", file: "Progress-presentation-slides-01.pdf" },
     { title: "Progress Presentation 02", file: "Progress-presentation-slides-02.pdf" },
@@ -53,11 +53,11 @@ export function DocumentsSection() {
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
                 <FileText className="w-8 h-8" />
               </div>
-              
+
               <h3 className="font-semibold text-foreground mb-6 h-12 flex items-center justify-center">
                 {doc.title}
               </h3>
-              
+
               <div className="flex gap-3 w-full">
                 <a href={`/documents/${doc.file}`} target="_blank" rel="noopener noreferrer" className="flex-1 py-2 px-3 rounded-lg bg-background text-sm font-medium border border-border hover:border-primary hover:text-primary transition-colors flex items-center justify-center gap-2">
                   <Eye className="w-4 h-4" /> View
