@@ -78,6 +78,41 @@ export function FAQSection() {
 }
 
 export function ContactSection() {
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMsg(data.error || "Something went wrong. Please try again.");
+        setStatus("error");
+      } else {
+        setStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      }
+    } catch {
+      setErrorMsg("Network error. Please check your connection and try again.");
+      setStatus("error");
+    }
+  };
+
   return (
     <section id="contact" className="py-24 relative bg-foreground/5">
       <div className="container mx-auto px-4 md:px-6">
@@ -106,44 +141,91 @@ export function ContactSection() {
             transition={{ duration: 0.6 }}
             className="glass-panel p-8 rounded-2xl"
           >
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground/80">Name</label>
-                <input 
-                  type="text" 
-                  className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                  placeholder="Your name"
-                />
+            {status === "success" ? (
+              <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-center gap-4">
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary text-3xl">✓</div>
+                <h3 className="text-xl font-bold text-foreground">Message Sent!</h3>
+                <p className="text-foreground/60">Thank you for reaching out. We&apos;ll get back to you soon.</p>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="mt-2 px-6 py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition-colors text-sm font-medium"
+                >
+                  Send another message
+                </button>
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground/80">Email</label>
-                <input 
-                  type="email" 
-                  className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground/80">Subject</label>
-                <input 
-                  type="text" 
-                  className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                  placeholder="How can we help?"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground/80">Message</label>
-                <textarea 
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
-                  placeholder="Your message here..."
-                />
-              </div>
-              
-              <button className="w-full py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-primary/25">
-                <Send className="w-5 h-5" /> Send Message
-              </button>
-            </form>
+            ) : (
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground/80">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground/80">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground/80">Subject</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    required
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="How can we help?"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-foreground/80">Message</label>
+                  <textarea
+                    rows={4}
+                    name="message"
+                    required
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
+                    placeholder="Your message here..."
+                  />
+                </div>
+
+                {status === "error" && (
+                  <p className="text-red-500 text-sm bg-red-500/10 px-4 py-2 rounded-lg">{errorMsg}</p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="w-full py-3 rounded-xl bg-primary text-white font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-primary/25 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {status === "loading" ? (
+                    <>
+                      <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" /> Send Message
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
           </motion.div>
 
           {/* Map Placeholder */}
@@ -162,7 +244,7 @@ export function ContactSection() {
               <p className="text-foreground/70 text-center max-w-[200px]">
                 New Kandy Road, Malabe, Sri Lanka
               </p>
-              
+
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="glass p-4 rounded-xl text-center backdrop-blur-md bg-background/60">
                   <span className="text-sm font-medium">Google Maps Placeholder</span>
