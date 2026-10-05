@@ -11,10 +11,10 @@ export function HeroSection() {
   const [activeTab, setActiveTab] = useState(0);
 
   const highlights = [
-    { title: "Disease Scan", status: "Active CNN Model", metric: "98.4% Acc.", icon: ShieldCheck, color: "text-emerald-500 bg-emerald-500/10" },
-    { title: "Labour Index", status: "Optimal Allocation", metric: "+32% Prod.", icon: Users, color: "text-blue-500 bg-blue-500/10" },
-    { title: "Climate Intel", status: "Micro-Forecast", metric: "26°C / 78% RH", icon: ThermometerSun, color: "text-amber-500 bg-amber-500/10" },
-    { title: "Tea Vision", status: "BOPF Grade A", metric: "Computer Vision", icon: Cpu, color: "text-purple-500 bg-purple-500/10" },
+    { title: "Disease Scan", status: "YOLOv8s", metric: "96.1% mAP", icon: ShieldCheck, color: "text-emerald-500 bg-emerald-500/10" },
+    { title: "Labour Index", status: "LightGBM + IoT", metric: "82% Acc.", icon: Users, color: "text-blue-500 bg-blue-500/10" },
+    { title: "Climate Intel", status: "GBR + Random Forest", metric: "89% Acc.", icon: ThermometerSun, color: "text-amber-500 bg-amber-500/10" },
+    { title: "Tea Vision", status: "ConvNeXtV2-Tiny", metric: "99.7% F1", icon: Cpu, color: "text-purple-500 bg-purple-500/10" },
   ];
 
   useEffect(() => {
@@ -49,16 +49,16 @@ export function HeroSection() {
               className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-mono font-semibold tracking-wider uppercase backdrop-blur-md shadow-sm"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span>SLIIT Research Project 2026 · IT26-118</span>
+              <span>R26-IT-118 · SLIIT Research Project 2026</span>
             </motion.div>
 
             {/* Display Headline */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.08] text-foreground">
-              Smart AI Intelligence for <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-emerald-500 to-accent">Tea Estate</span> Management
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-[1.1] text-foreground">
+              Intelligent Decision Support System for <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-emerald-500 to-accent">Sri Lankan Tea Estate</span> Management
             </h1>
 
-            <p className="text-lg md:text-xl text-foreground/70 mb-8 max-w-2xl leading-relaxed font-normal">
-              An integrated decision support platform empowering Sri Lankan tea plantations with AI disease detection, workforce welfare optimization, micro-climate prediction, and automated tea grading.
+            <p className="text-base md:text-lg text-foreground/75 mb-8 max-w-2xl leading-relaxed font-normal">
+              An integrated AI, ML, Deep Learning and IoT-based decision support platform for labour welfare, tea disease intelligence, climate-aware planning and automated tea quality grading.
             </p>
 
             {/* CTAs & External Links */}
@@ -67,7 +67,7 @@ export function HeroSection() {
                 href="#research"
                 className="px-7 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 flex items-center gap-2 group"
               >
-                <span>Explore Research Suite</span>
+                <span>Explore Research Modules</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
@@ -97,19 +97,23 @@ export function HeroSection() {
               </div>
             </div>
 
-            {/* Quick Metrics Bar */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border/40">
+            {/* Verified Research Metrics Bar */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-border/40">
               <div>
-                <div className="text-2xl font-bold font-mono text-primary">4 AI</div>
-                <div className="text-xs text-foreground/60 font-medium">Specialized Modules</div>
+                <div className="text-xl font-bold font-mono text-primary">82%</div>
+                <div className="text-[11px] text-foreground/60 font-medium">Labour Class Acc.</div>
               </div>
               <div>
-                <div className="text-2xl font-bold font-mono text-emerald-500">95%+</div>
-                <div className="text-xs text-foreground/60 font-medium">Model Accuracy</div>
+                <div className="text-xl font-bold font-mono text-emerald-500">96.1%</div>
+                <div className="text-[11px] text-foreground/60 font-medium">YOLOv8s mAP@0.5</div>
               </div>
               <div>
-                <div className="text-2xl font-bold font-mono text-accent">SLIIT</div>
-                <div className="text-xs text-foreground/60 font-medium">Sri Lanka Research</div>
+                <div className="text-xl font-bold font-mono text-amber-500">89%</div>
+                <div className="text-[11px] text-foreground/60 font-medium">Weather Module Acc.</div>
+              </div>
+              <div>
+                <div className="text-xl font-bold font-mono text-accent">99.7%</div>
+                <div className="text-[11px] text-foreground/60 font-medium">Tea Grading F1</div>
               </div>
             </div>
           </motion.div>
@@ -128,18 +132,18 @@ export function HeroSection() {
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-amber-500/80" />
                   <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="text-xs font-mono text-foreground/50 ml-2">teaguard-ai-v2.0.live</span>
+                  <span className="text-xs font-mono text-foreground/50 ml-2">teaguard-r26-it-118</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-mono">
                   <Activity className="w-3.5 h-3.5 animate-pulse" />
-                  <span>SYSTEM ONLINE</span>
+                  <span>PP2 CERTIFIED</span>
                 </div>
               </div>
 
               {/* Main Interactive Screen */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono text-foreground/60 uppercase tracking-widest">Active Module Feed</span>
+                  <span className="text-xs font-mono text-foreground/60 uppercase tracking-widest font-semibold">Validated Model Pipeline</span>
                   <Sparkles className="w-4 h-4 text-primary" />
                 </div>
 
@@ -176,8 +180,8 @@ export function HeroSection() {
                 {/* Simulated Live Analytics Graph / Display Box */}
                 <div className="p-4 rounded-2xl bg-foreground/5 border border-border/30 mt-4">
                   <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                    <span className="text-primary font-bold">MODULE DIAGNOSTICS</span>
-                    <span className="text-foreground/50">Processing Live Stream</span>
+                    <span className="text-primary font-bold">RESEARCH EVALUATION</span>
+                    <span className="text-foreground/50">Verified Pipeline</span>
                   </div>
                   <div className="h-2 w-full bg-foreground/10 rounded-full overflow-hidden mb-3">
                     <motion.div
@@ -186,11 +190,11 @@ export function HeroSection() {
                       transition={{ duration: 4, repeat: Infinity, repeatType: "mirror" }}
                     />
                   </div>
-                  <p className="text-xs text-foreground/70 leading-normal">
-                    {activeTab === 0 && "CNN Deep Learning model analyzing leaf spot patterns & blister blight risk."}
-                    {activeTab === 1 && "Optimizing estate labor allocation matrix & plucking schedule based on yield."}
-                    {activeTab === 2 && "Real-time micro-climate sensors feeding weather risk predictions."}
-                    {activeTab === 3 && "Computer Vision inspecting leaf color spectrum, size & grade purity."}
+                  <p className="text-xs text-foreground/75 leading-normal">
+                    {activeTab === 0 && "YOLOv8s object detection identifying Anthracnose, Algal Leaf, Bird Eye Spot, Blister Blight, Grey Blight & Red Rust."}
+                    {activeTab === 1 && "ESP32-S3 + MAX30102 physiological wearable feeding LightGBM for worker stress condition classification (82% acc)."}
+                    {activeTab === 2 && "Gradient Boosting Regressor for 8h weather forecast & Multi-output Random Forest for regional disease risk (89% acc)."}
+                    {activeTab === 3 && "ConvNeXtV2-Tiny (convnextv2_tiny.fcmae_ft_in22k_in1k) classifying 8 tea grades (99.7% F1)."}
                   </p>
                 </div>
               </div>

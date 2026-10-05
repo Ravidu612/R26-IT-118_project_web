@@ -2,35 +2,38 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Cpu, Server, Layout, Database } from "lucide-react";
+import { Cpu, Server, Layout, Database, Radio } from "lucide-react";
 
 export function TechStackSection() {
   const [activeCategory, setActiveCategory] = useState("all");
 
   const categories = [
-    { id: "all", label: "All Technologies" },
-    { id: "ai", label: "AI & Computer Vision", icon: Cpu },
-    { id: "backend", label: "Backend & Services", icon: Server },
-    { id: "frontend", label: "Frontend & Mobile", icon: Layout },
-    { id: "data", label: "Data & Telemetry", icon: Database },
+    { id: "all", label: "All Stack" },
+    { id: "dl", label: "Deep Learning & Vision", icon: Cpu },
+    { id: "ml", label: "ML & Analytics", icon: Cpu },
+    { id: "backend", label: "Backend & DB", icon: Server },
+    { id: "frontend", label: "Frontend", icon: Layout },
+    { id: "iot", label: "IoT & Telemetry", icon: Radio },
   ];
 
   const techList = [
-    { name: "TensorFlow", cat: "ai", level: "Deep Learning" },
-    { name: "Python", cat: "ai", level: "ML Core" },
-    { name: "OpenCV", cat: "ai", level: "Computer Vision" },
-    { name: "MobileNet", cat: "ai", level: "CNN Architecture" },
-    { name: "Scikit-Learn", cat: "ai", level: "Analytics" },
-    { name: "Next.js 15", cat: "frontend", level: "Web Framework" },
-    { name: "React", cat: "frontend", level: "UI Library" },
+    { name: "YOLOv8s", cat: "dl", level: "Object Detection" },
+    { name: "ConvNeXtV2-Tiny", cat: "dl", level: "Tea Grading CNN" },
+    { name: "Python", cat: "dl", level: "ML Language" },
+    { name: "LightGBM", cat: "ml", level: "Stress Classifier" },
+    { name: "Scikit-learn", cat: "ml", level: "Regressors & RF" },
+    { name: "Node.js", cat: "backend", level: "Runtime" },
+    { name: "Express.js", cat: "backend", level: "API Services" },
+    { name: "MongoDB Atlas", cat: "backend", level: "NoSQL Storage" },
+    { name: "Next.js", cat: "frontend", level: "Web Framework" },
+    { name: "React", cat: "frontend", level: "UI Core" },
     { name: "Tailwind CSS", cat: "frontend", level: "Styling" },
     { name: "Framer Motion", cat: "frontend", level: "Animations" },
-    { name: "Node.js", cat: "backend", level: "Runtime" },
-    { name: "Express.js", cat: "backend", level: "REST API" },
-    { name: "JWT Auth", cat: "backend", level: "Security" },
-    { name: "MongoDB Atlas", cat: "data", level: "Database" },
-    { name: "Cloudinary", cat: "data", level: "Image Storage" },
-    { name: "OpenWeather API", cat: "data", level: "Weather Feed" },
+    { name: "ESP32-S3", cat: "iot", level: "Microcontroller" },
+    { name: "MAX30102", cat: "iot", level: "HR & SpO₂ Sensor" },
+    { name: "BLE Communication", cat: "iot", level: "Wireless Telemetry" },
+    { name: "OpenWeatherMap API", cat: "iot", level: "Weather Stream" },
+    { name: "Hugging Face API", cat: "dl", level: "Model Hosting" },
   ];
 
   const filteredTech = activeCategory === "all"
@@ -43,10 +46,10 @@ export function TechStackSection() {
         
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-mono font-semibold uppercase tracking-wider mb-3">
-            <span>Technical Ecosystem</span>
+            <span>Verified Tech Stack</span>
           </div>
           <h2 className="text-2xl md:text-4xl font-extrabold text-foreground">
-            Engineered with <span className="text-primary">Industry Standards</span>
+            Technologies & <span className="text-primary">Hardware Stack</span>
           </h2>
         </div>
 
@@ -68,13 +71,13 @@ export function TechStackSection() {
         </div>
 
         {/* Tech Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
           {filteredTech.map((tech, idx) => (
             <motion.div
               key={tech.name}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: idx * 0.04 }}
+              transition={{ duration: 0.3, delay: idx * 0.03 }}
               className="glass p-4 rounded-2xl text-center border border-border/40 hover:border-primary/50 hover:bg-primary/5 transition-all group"
             >
               <div className="font-bold text-sm text-foreground group-hover:text-primary transition-colors">
