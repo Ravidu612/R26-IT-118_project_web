@@ -10,8 +10,8 @@ export function TimelineSection() {
     { title: "Model Development", status: "completed" },
     { title: "Frontend", status: "completed" },
     { title: "Backend", status: "completed" },
-    { title: "Integration", status: "pending" },
-    { title: "Testing", status: "pending" },
+    { title: "Integration", status: "completed" },
+    { title: "Testing", status: "completed" },
     { title: "Final Evaluation", status: "pending" },
     { title: "Presentation", status: "pending" }
   ];
@@ -48,14 +48,14 @@ export function TimelineSection() {
                   ${idx % 2 === 0 ? "md:items-end md:pr-12 md:text-right" : "md:ml-auto md:pl-12 md:text-left"}
                 `}>
                   <div className="absolute top-1/2 -translate-y-1/2 left-[-5px] md:left-1/2 md:-ml-[5px] w-3 h-3 rounded-full bg-primary ring-4 ring-background" />
-                  
+
                   <div className={`glass p-5 rounded-xl shadow-sm inline-block min-w-[200px] border-l-4
-                    ${item.status === 'completed' ? 'border-l-emerald-500' : 
+                    ${item.status === 'completed' ? 'border-l-emerald-500' :
                       item.status === 'in-progress' ? 'border-l-amber-500' : 'border-l-primary/20'}
                   `}>
                     <h3 className="font-bold text-lg mb-1">{item.title}</h3>
                     <span className={`text-xs px-2 py-1 rounded-full uppercase tracking-wider font-semibold
-                      ${item.status === 'completed' ? 'bg-emerald-500/10 text-emerald-500' : 
+                      ${item.status === 'completed' ? 'bg-emerald-500/10 text-emerald-500' :
                         item.status === 'in-progress' ? 'bg-amber-500/10 text-amber-500' : 'bg-foreground/5 text-foreground/40'}
                     `}>
                       {item.status.replace('-', ' ')}

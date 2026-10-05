@@ -7,15 +7,19 @@ export function SupervisorsSection() {
   const supervisors = [
     {
       title: "Research Supervisor",
-      name: "Name placeholder",
-      department: "Department of IT",
-      specialization: "AI & Machine Learning",
+      name: "Ms. Uthpala Samarakoon",
+      department: "Department of Information Technology",
+      specialization: "Senior Lecturer Software Engineering",
+      email: "uthpala.s@sliit.lk",
+      image: "/supervisors/uthpalas.png",
     },
     {
       title: "Co-Supervisor",
-      name: "Name placeholder",
-      department: "Department of IT",
-      specialization: "Software Engineering",
+      name: "Ms. Suriyaa Kumari",
+      department: "Department of Information Technology",
+      specialization: "Lecturer in Software Engineering",
+      email: "suriyaa.k@sliit.lk",
+      image: "/supervisors/suriyas.png",
     }
   ];
 
@@ -29,9 +33,9 @@ export function SupervisorsSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-foreground">
+          <h1 className="text-3xl md:text-5xl font-bold mb-6 text-foreground">
             Project <span className="text-primary">Supervisors</span>
-          </h2>
+          </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full mb-8" />
         </motion.div>
 
@@ -48,18 +52,29 @@ export function SupervisorsSection() {
               {/* Decoration */}
               <div className="absolute -right-10 -top-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors" />
 
-              <div className="w-24 h-24 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 border-4 border-background shadow-md">
-                <User className="w-10 h-10 text-secondary" />
+              <div className="w-24 h-24 rounded-full overflow-hidden bg-secondary/10 flex items-center justify-center shrink-0 border-4 border-background shadow-md">
+                {supervisor.image ? (
+                  <img
+                    src={supervisor.image}
+                    alt={`${supervisor.name} photo`}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <User className="w-10 h-10 text-secondary" />
+                )}
               </div>
-              
+
               <div className="text-center sm:text-left z-10">
                 <div className="text-primary font-bold text-sm uppercase tracking-wider mb-2">
                   {supervisor.title}
                 </div>
                 <h3 className="font-bold text-xl mb-1">{supervisor.name}</h3>
                 <p className="text-foreground/60 text-sm mb-4">{supervisor.department} | {supervisor.specialization}</p>
-                
-                <a href="#" className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg bg-foreground/5 hover:bg-primary/10 hover:text-primary transition-colors">
+
+                <a
+                  href={`mailto:${supervisor.email}`}
+                  className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg bg-foreground/5 hover:bg-primary/10 hover:text-primary transition-colors"
+                >
                   <Mail className="w-4 h-4" /> Email
                 </a>
               </div>
