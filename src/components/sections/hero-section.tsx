@@ -33,7 +33,7 @@ export function HeroSection() {
 
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Hero Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -42,7 +42,7 @@ export function HeroSection() {
             className="lg:col-span-7 text-left"
           >
             {/* Status Pill */}
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
@@ -63,14 +63,14 @@ export function HeroSection() {
 
             {/* CTAs & External Links */}
             <div className="flex flex-wrap items-center gap-4 mb-10">
-              <Link 
+              <Link
                 href="#research"
                 className="px-7 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 flex items-center gap-2 group"
               >
                 <span>Explore Research Modules</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link 
+              <Link
                 href="#team"
                 className="px-7 py-3.5 rounded-xl glass hover:bg-primary/10 text-foreground font-semibold transition-all border border-primary/20 hover:border-primary/50 flex items-center gap-2"
               >
@@ -78,7 +78,7 @@ export function HeroSection() {
                 <span>Research Team</span>
               </Link>
               <div className="flex items-center gap-2 pl-2">
-                <a 
+                <a
                   href="https://github.com/Ravidu612/R26-IT-118"
                   target="_blank"
                   rel="noreferrer"
@@ -87,7 +87,7 @@ export function HeroSection() {
                 >
                   <FaGithub className="w-5 h-5 text-foreground/80 group-hover:text-primary transition-colors" />
                 </a>
-                <a 
+                <a
                   href="#documents"
                   className="p-3.5 rounded-xl glass hover:bg-foreground/10 transition-all border border-border group"
                   aria-label="Documentation"
@@ -132,11 +132,11 @@ export function HeroSection() {
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-amber-500/80" />
                   <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="text-xs font-mono text-foreground/50 ml-2">teaguard-r26-it-118</span>
+                  <span className="text-xs font-mono text-foreground/50 ml-2">Teaguard-R26-IT-118</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-mono">
                   <Activity className="w-3.5 h-3.5 animate-pulse" />
-                  <span>PP2 CERTIFIED</span>
+                  <span></span>
                 </div>
               </div>
 
@@ -156,11 +156,10 @@ export function HeroSection() {
                       <button
                         key={idx}
                         onClick={() => setActiveTab(idx)}
-                        className={`p-4 rounded-2xl text-left transition-all duration-300 border ${
-                          isActive
-                            ? "bg-primary/10 border-primary shadow-md scale-[1.02]"
-                            : "glass border-border/40 hover:border-primary/30"
-                        }`}
+                        className={`p-4 rounded-2xl text-left transition-all duration-300 border ${isActive
+                          ? "bg-primary/10 border-primary shadow-md scale-[1.02]"
+                          : "glass border-border/40 hover:border-primary/30"
+                          }`}
                       >
                         <div className="flex items-center justify-between mb-2">
                           <div className={`p-2 rounded-xl ${item.color}`}>

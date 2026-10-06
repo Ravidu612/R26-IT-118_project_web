@@ -12,8 +12,9 @@ export function TimelineSection() {
     { title: "Backend", status: "completed" },
     { title: "Integration", status: "completed" },
     { title: "Testing", status: "completed" },
+    { title: "Presentation", status: "pending" },
     { title: "Final Evaluation", status: "pending" },
-    { title: "Presentation", status: "pending" }
+
   ];
 
   return (

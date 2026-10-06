@@ -63,7 +63,7 @@ export function GallerySection() {
                 }} />
                 <span className="text-foreground/40 font-medium z-10 relative px-6 hidden" style={{ display: 'block' }}>{img.title} Placeholder</span>
               </div>
-              
+
               <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center backdrop-blur-sm">
                 <Maximize2 className="w-8 h-8 text-white mb-2" />
                 <span className="text-white font-semibold">{img.title}</span>
@@ -76,13 +76,13 @@ export function GallerySection() {
       {/* Lightbox */}
       {selectedImage && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-md">
-          <button 
+          <button
             onClick={() => setSelectedImage(null)}
             className="absolute top-6 right-6 text-white/70 hover:text-white p-2 glass rounded-full"
           >
             <X className="w-6 h-6" />
           </button>
-          
+
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}

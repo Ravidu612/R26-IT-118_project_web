@@ -50,9 +50,8 @@ export function FAQSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className={`glass rounded-xl overflow-hidden transition-all duration-300 border ${
-                openIndex === idx ? 'border-primary shadow-md' : 'border-border/50'
-              }`}
+              className={`glass rounded-xl overflow-hidden transition-all duration-300 border ${openIndex === idx ? 'border-primary shadow-md' : 'border-border/50'
+                }`}
             >
               <button
                 className="w-full px-6 py-4 text-left font-semibold flex justify-between items-center bg-background/50 hover:bg-foreground/5 transition-colors"
@@ -61,8 +60,8 @@ export function FAQSection() {
                 <span>{faq.question}</span>
                 <ChevronDown className={`w-5 h-5 text-primary transition-transform duration-300 ${openIndex === idx ? 'rotate-180' : ''}`} />
               </button>
-              
-              <div 
+
+              <div
                 className={`overflow-hidden transition-all duration-300 ${openIndex === idx ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}
               >
                 <div className="px-6 py-4 text-foreground/70 border-t border-border/50 bg-background/30">

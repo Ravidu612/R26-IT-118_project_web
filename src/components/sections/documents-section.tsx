@@ -13,12 +13,14 @@ export function DocumentsSection() {
     { title: "Progress Presentation", file: "Progress-presentation-slides.pdf" },
     { title: "Progress Presentation 01", file: "Progress-presentation-slides-01.pdf" },
     { title: "Progress Presentation 02", file: "Progress-presentation-slides-02.pdf" },
-    { title: "Final Report", file: "final-report.pdf" },
     { title: "Research Paper", file: "research-paper.pdf" },
     { title: "Poster", file: "poster.pdf" },
     { title: "Progress Reports", file: "progress-reports.pdf" },
-    { title: "Ethics Form", file: "ethics-form.pdf" },
-    { title: "Log Book", file: "log-book.pdf" }
+    { title: "Final Report", file: "final-report.pdf" },
+    { title: "Log Book Member 01", file: "log-book.pdf" },
+    { title: "Log Book Member 02", file: "log-book2.pdf" },
+    { title: "Log Book Member 03", file: "log-book3.pdf" },
+    { title: "Log Book Member 04", file: "log-book4.pdf" },
   ];
 
   return (
