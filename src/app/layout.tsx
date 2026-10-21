@@ -8,9 +8,30 @@ import { Footer } from "@/components/footer";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "TeaGuard AI | Smart Tea Estate Management",
-  description: "An AI-powered smart plantation management platform designed to improve labour management, tea disease detection, weather intelligence and AI-based tea grading for Sri Lankan tea estates.",
-  keywords: "TeaGuard AI, Smart Plantation, AI in Agriculture, Tea Estate Management, Sri Lanka, SLIIT Research",
+  title: "TeaGuard AI | Intelligent Decision Support System for Sri Lankan Tea Estate Management (R26-IT-118)",
+  description:
+    "SLIIT Final-Year Undergraduate Research Project (Group R26-IT-118). An integrated AI, ML, Deep Learning, and IoT decision support system for labor management, tea leaf disease detection, climate intelligence, and tea sorting automation.",
+  keywords: [
+    "TeaGuard AI",
+    "Sri Lankan Tea Estate Management",
+    "SLIIT Research Project",
+    "R26-IT-118",
+    "Ceylon Tea",
+    "Tea Leaf Disease Detection",
+    "YOLOv8s",
+    "ConvNeXtV2",
+    "Precision Agriculture Sri Lanka",
+    "Tea Research Institute of Sri Lanka",
+  ],
+  authors: [
+    { name: "Miuranga W.A.R" },
+    { name: "Gunasekara L.M.N.P" },
+    { name: "Gunasekara G.N.D" },
+    { name: "Pathirana I.M" },
+  ],
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -28,7 +49,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="flex-1 pt-20">{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

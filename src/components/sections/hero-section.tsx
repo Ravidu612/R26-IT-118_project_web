@@ -1,7 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, FileText, Users, Activity, Sparkles, Cpu, ShieldCheck, ThermometerSun } from "lucide-react";
+import {
+  ArrowRight,
+  FileText,
+  Users,
+  Activity,
+  Sparkles,
+  Cpu,
+  ShieldCheck,
+  ThermometerSun,
+  BookOpen,
+  Calendar,
+  Layers,
+  GraduationCap,
+} from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -11,17 +24,49 @@ export function HeroSection() {
   const [activeTab, setActiveTab] = useState(0);
 
   const highlights = [
-    { title: "Disease Scan", status: "YOLOv8s", metric: "96.1% mAP", icon: ShieldCheck, color: "text-emerald-500 bg-emerald-500/10" },
-    { title: "Labour Index", status: "LightGBM + IoT", metric: "82% Acc.", icon: Users, color: "text-blue-500 bg-blue-500/10" },
-    { title: "Climate Intel", status: "GBR + Random Forest", metric: "89% Acc.", icon: ThermometerSun, color: "text-amber-500 bg-amber-500/10" },
-    { title: "Tea Vision", status: "ConvNeXtV2-Tiny", metric: "99.7% F1", icon: Cpu, color: "text-purple-500 bg-purple-500/10" },
+    {
+      title: "Disease Detection",
+      subtitle: "Lead Component (Miuranga W.A.R)",
+      status: "YOLOv8s Vision AI",
+      metric: "96.1% mAP@0.5",
+      icon: ShieldCheck,
+      color: "text-emerald-500 bg-emerald-500/10",
+      link: "/domain#objectives",
+    },
+    {
+      title: "Labour Management",
+      subtitle: "Gunasekara L.M.N.P",
+      status: "LightGBM + ESP32-S3",
+      metric: "82% Accuracy",
+      icon: Users,
+      color: "text-blue-500 bg-blue-500/10",
+      link: "/domain#objectives",
+    },
+    {
+      title: "Climate Intelligence",
+      subtitle: "Gunasekara G.N.D",
+      status: "GBR + Random Forest",
+      metric: "89% Accuracy",
+      icon: ThermometerSun,
+      color: "text-amber-500 bg-amber-500/10",
+      link: "/domain#objectives",
+    },
+    {
+      title: "Tea Sorting Vision",
+      subtitle: "Pathirana I.M",
+      status: "ConvNeXtV2-Tiny",
+      metric: "99.7% F1-score",
+      icon: Cpu,
+      color: "text-purple-500 bg-purple-500/10",
+      link: "/domain#objectives",
+    },
   ];
 
   useEffect(() => {
     setMounted(true);
     const interval = setInterval(() => {
       setActiveTab((prev) => (prev + 1) % highlights.length);
-    }, 3500);
+    }, 4000);
     return () => clearInterval(interval);
   }, [highlights.length]);
 
@@ -33,7 +78,6 @@ export function HeroSection() {
 
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
           {/* Left Hero Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -49,71 +93,98 @@ export function HeroSection() {
               className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-mono font-semibold tracking-wider uppercase backdrop-blur-md shadow-sm"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span>R26-IT-118 · SLIIT Research Project 2026</span>
+              <span>R26-IT-118 · SLIIT Final Year Research Project 2026</span>
             </motion.div>
 
             {/* Display Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-[1.1] text-foreground">
-              Intelligent Decision Support System for <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-emerald-500 to-accent">Sri Lankan Tea Estate</span> Management
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-[1.12] text-foreground">
+              Intelligent Decision Support System for{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-emerald-500 to-accent">
+                Sri Lankan Tea Estate
+              </span>{" "}
+              Management
             </h1>
 
-            <p className="text-base md:text-lg text-foreground/75 mb-8 max-w-2xl leading-relaxed font-normal">
-              An integrated AI, ML, Deep Learning and IoT-based decision support platform for labour welfare, tea disease intelligence, climate-aware planning and automated tea quality grading.
+            <p className="text-base md:text-lg text-foreground/80 mb-6 max-w-2xl leading-relaxed font-normal">
+              <strong>TeaGuard AI</strong> unites computer vision, edge IoT physiological telemetry, meteorological machine learning, and optical grade classification into a unified decision support platform specifically engineered for the Sri Lankan plantation sector.
             </p>
 
-            {/* CTAs & External Links */}
-            <div className="flex flex-wrap items-center gap-4 mb-10">
+            {/* Academic Component Subtitle */}
+            <div className="mb-8 p-3 rounded-xl bg-primary/5 border border-primary/20 text-xs text-foreground/80 flex items-center gap-2">
+              <GraduationCap className="w-4 h-4 text-primary shrink-0" />
+              <span>
+                <strong>Faculty of Computing, SLIIT</strong> · Department of Information Technology · TIM Research Group
+              </span>
+            </div>
+
+            {/* Calls to Action Linking to Required Sections */}
+            <div className="flex flex-wrap items-center gap-3 mb-10">
               <Link
-                href="#research"
-                className="px-7 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 flex items-center gap-2 group"
+                href="/domain"
+                className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-xs md:text-sm hover:bg-primary/90 transition-all shadow-md hover:shadow-primary/30 hover:-translate-y-0.5 flex items-center gap-2 group"
               >
-                <span>Explore Research Modules</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <BookOpen className="w-4 h-4" />
+                <span>Explore Domain</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </Link>
+
               <Link
-                href="#team"
-                className="px-7 py-3.5 rounded-xl glass hover:bg-primary/10 text-foreground font-semibold transition-all border border-primary/20 hover:border-primary/50 flex items-center gap-2"
+                href="/milestones"
+                className="px-5 py-3 rounded-xl glass hover:bg-primary/10 text-foreground font-semibold text-xs md:text-sm transition-all border border-primary/20 hover:border-primary/50 flex items-center gap-2"
               >
-                <Users className="w-4 h-4 text-primary" />
-                <span>Research Team</span>
+                <Calendar className="w-4 h-4 text-primary" />
+                <span>Milestones</span>
               </Link>
-              <div className="flex items-center gap-2 pl-2">
-                <a
-                  href="https://github.com/Ravidu612/R26-IT-118"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-3.5 rounded-xl glass hover:bg-foreground/10 transition-all border border-border group"
-                  aria-label="GitHub Repository"
-                >
-                  <FaGithub className="w-5 h-5 text-foreground/80 group-hover:text-primary transition-colors" />
-                </a>
-                <a
-                  href="#documents"
-                  className="p-3.5 rounded-xl glass hover:bg-foreground/10 transition-all border border-border group"
-                  aria-label="Documentation"
-                >
-                  <FileText className="w-5 h-5 text-foreground/80 group-hover:text-primary transition-colors" />
-                </a>
-              </div>
+
+              <Link
+                href="/documents"
+                className="px-5 py-3 rounded-xl glass hover:bg-primary/10 text-foreground font-semibold text-xs md:text-sm transition-all border border-border hover:border-primary/50 flex items-center gap-2"
+              >
+                <FileText className="w-4 h-4 text-primary" />
+                <span>Documents</span>
+              </Link>
+
+              <Link
+                href="/presentations"
+                className="px-5 py-3 rounded-xl glass hover:bg-primary/10 text-foreground font-semibold text-xs md:text-sm transition-all border border-border hover:border-primary/50 flex items-center gap-2"
+              >
+                <Sparkles className="w-4 h-4 text-primary" />
+                <span>Presentations</span>
+              </Link>
+
+              <a
+                href="https://github.com/Ravidu612/R26-IT-118"
+                target="_blank"
+                rel="noreferrer"
+                className="p-3 rounded-xl glass hover:bg-foreground/10 transition-all border border-border text-foreground/75 hover:text-primary"
+                aria-label="GitHub Repository"
+                title="Research GitHub Repository"
+              >
+                <FaGithub className="w-4 h-4" />
+              </a>
             </div>
 
             {/* Verified Research Metrics Bar */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-border/40">
-              <div>
-                <div className="text-xl font-bold font-mono text-primary">82%</div>
-                <div className="text-[11px] text-foreground/60 font-medium">Labour Class Acc.</div>
-              </div>
-              <div>
-                <div className="text-xl font-bold font-mono text-emerald-500">96.1%</div>
+              <div className="p-2 rounded-lg bg-card border border-border/60">
+                <div className="text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400">96.1%</div>
                 <div className="text-[11px] text-foreground/60 font-medium">YOLOv8s mAP@0.5</div>
+                <div className="text-[9px] text-primary font-mono">Disease Scan (Lead)</div>
               </div>
-              <div>
-                <div className="text-xl font-bold font-mono text-amber-500">89%</div>
+              <div className="p-2 rounded-lg bg-card border border-border/60">
+                <div className="text-xl font-bold font-mono text-blue-600 dark:text-blue-400">82%</div>
+                <div className="text-[11px] text-foreground/60 font-medium">Labour Stress Acc.</div>
+                <div className="text-[9px] text-foreground/50 font-mono">LightGBM + ESP32</div>
+              </div>
+              <div className="p-2 rounded-lg bg-card border border-border/60">
+                <div className="text-xl font-bold font-mono text-amber-600 dark:text-amber-400">89%</div>
                 <div className="text-[11px] text-foreground/60 font-medium">Weather Module Acc.</div>
+                <div className="text-[9px] text-foreground/50 font-mono">GBR + Random Forest</div>
               </div>
-              <div>
-                <div className="text-xl font-bold font-mono text-accent">99.7%</div>
+              <div className="p-2 rounded-lg bg-card border border-border/60">
+                <div className="text-xl font-bold font-mono text-purple-600 dark:text-purple-400">99.7%</div>
                 <div className="text-[11px] text-foreground/60 font-medium">Tea Grading F1</div>
+                <div className="text-[9px] text-foreground/50 font-mono">ConvNeXtV2-Tiny</div>
               </div>
             </div>
           </motion.div>
@@ -132,74 +203,101 @@ export function HeroSection() {
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-amber-500/80" />
                   <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="text-xs font-mono text-foreground/50 ml-2">Teaguard-R26-IT-118</span>
+                  <span className="text-xs font-mono text-foreground/50 ml-2">TeaGuard-R26-IT-118</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-mono">
                   <Activity className="w-3.5 h-3.5 animate-pulse" />
-                  <span></span>
+                  <span>Online System</span>
                 </div>
               </div>
 
-              {/* Main Interactive Screen */}
-              <div className="space-y-4">
+              {/* Four Module Tabs */}
+              <div className="grid grid-cols-2 gap-2 mb-6">
+                {highlights.map((item, idx) => {
+                  const Icon = item.icon;
+                  const isActive = activeTab === idx;
+                  return (
+                    <button
+                      key={item.title}
+                      onClick={() => setActiveTab(idx)}
+                      className={`p-3 rounded-xl text-left transition-all relative overflow-hidden border ${
+                        isActive
+                          ? "bg-primary/10 border-primary shadow-sm"
+                          : "bg-background/40 border-border/40 hover:bg-background/80"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`p-1.5 rounded-lg ${item.color}`}>
+                          <Icon className="w-3.5 h-3.5" />
+                        </span>
+                        <span className="font-bold text-xs text-foreground truncate">{item.title}</span>
+                      </div>
+                      <div className="text-[10px] font-mono text-foreground/50 truncate">{item.subtitle}</div>
+                      <div className="text-[11px] font-mono font-bold text-primary mt-1">{item.metric}</div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Active Module Detail */}
+              <div className="p-4 rounded-2xl bg-card border border-border/80 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono text-foreground/60 uppercase tracking-widest font-semibold">Validated Model Pipeline</span>
-                  <Sparkles className="w-4 h-4 text-primary" />
+                  <span className="text-xs font-mono text-primary font-bold uppercase tracking-wider">
+                    {highlights[activeTab].status}
+                  </span>
+                  <span className="text-xs font-mono text-foreground/60">{highlights[activeTab].metric}</span>
                 </div>
 
-                {/* Highlight Tab selector */}
-                <div className="grid grid-cols-2 gap-3">
-                  {highlights.map((item, idx) => {
-                    const Icon = item.icon;
-                    const isActive = activeTab === idx;
-                    return (
-                      <button
-                        key={idx}
-                        onClick={() => setActiveTab(idx)}
-                        className={`p-4 rounded-2xl text-left transition-all duration-300 border ${isActive
-                          ? "bg-primary/10 border-primary shadow-md scale-[1.02]"
-                          : "glass border-border/40 hover:border-primary/30"
-                          }`}
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <div className={`p-2 rounded-xl ${item.color}`}>
-                            <Icon className="w-4 h-4" />
-                          </div>
-                          <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-foreground/5 text-foreground/70">
-                            {item.metric}
-                          </span>
-                        </div>
-                        <div className="text-xs font-bold text-foreground mb-0.5">{item.title}</div>
-                        <div className="text-[11px] text-foreground/60 font-mono">{item.status}</div>
-                      </button>
-                    );
-                  })}
-                </div>
+                <h3 className="text-base font-bold text-foreground">
+                  {highlights[activeTab].title} — {highlights[activeTab].subtitle}
+                </h3>
 
-                {/* Simulated Live Analytics Graph / Display Box */}
-                <div className="p-4 rounded-2xl bg-foreground/5 border border-border/30 mt-4">
-                  <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                    <span className="text-primary font-bold">RESEARCH EVALUATION</span>
-                    <span className="text-foreground/50">Verified Pipeline</span>
-                  </div>
-                  <div className="h-2 w-full bg-foreground/10 rounded-full overflow-hidden mb-3">
-                    <motion.div
-                      className="h-full bg-gradient-to-r from-primary to-emerald-400 rounded-full"
-                      animate={{ width: ["20%", "85%", "60%", "98%"] }}
-                      transition={{ duration: 4, repeat: Infinity, repeatType: "mirror" }}
-                    />
-                  </div>
-                  <p className="text-xs text-foreground/75 leading-normal">
-                    {activeTab === 0 && "YOLOv8s object detection identifying Anthracnose, Algal Leaf, Bird Eye Spot, Blister Blight, Grey Blight & Red Rust."}
-                    {activeTab === 1 && "ESP32-S3 + MAX30102 physiological wearable feeding LightGBM for worker stress condition classification (82% acc)."}
-                    {activeTab === 2 && "Gradient Boosting Regressor for 8h weather forecast & Multi-output Random Forest for regional disease risk (89% acc)."}
-                    {activeTab === 3 && "ConvNeXtV2-Tiny (convnextv2_tiny.fcmae_ft_in22k_in1k) classifying 8 tea grades (99.7% F1)."}
-                  </p>
+                <p className="text-xs text-foreground/75 leading-relaxed">
+                  {activeTab === 0 &&
+                    "Individual research component of Miuranga W.A.R (IT22209320). Employs YOLOv8s computer vision to detect Anthracnose, Algal Leaf, Bird Eye Spot, Blister Blight, Grey Blight, and Red Rust with treatment recommendations."}
+                  {activeTab === 1 &&
+                    "Research component of Gunasekara L.M.N.P (IT22267986). Combines workforce allocation ML algorithms with an ESP32-S3 + MAX30102 physiological wearable monitoring Heart Rate and SpO₂."}
+                  {activeTab === 2 &&
+                    "Research component of Gunasekara G.N.D (IT22279620). Synthesizes OpenWeatherMap data to generate 8-hour temperature forecasts and Random Forest tea disease risk scores for Nuwara Eliya, Kandy, and Ratnapura."}
+                  {activeTab === 3 &&
+                    "Research component of Pathirana I.M (IT22282668). Analyzes optical tea sample imagery using ConvNeXtV2-Tiny to classify tea into 8 commercial grades (BM, BOP, BP, BROKEN_TEA, DUST, etc.)."}
+                </p>
+
+                <div className="pt-2 flex items-center justify-between">
+                  <Link
+                    href={highlights[activeTab].link}
+                    className="text-xs text-primary font-semibold hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>Read Domain Details</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
+                  <span className="text-[10px] font-mono text-foreground/50">Verified in PP2</span>
                 </div>
+              </div>
+
+              {/* Bottom Quick Links to Pages */}
+              <div className="mt-6 pt-4 border-t border-border/40 grid grid-cols-3 gap-2 text-center text-xs">
+                <Link
+                  href="/domain"
+                  className="p-2 rounded-xl bg-background/50 hover:bg-primary/10 hover:text-primary transition-colors border border-border/50 font-medium"
+                >
+                  Domain
+                </Link>
+                <Link
+                  href="/milestones"
+                  className="p-2 rounded-xl bg-background/50 hover:bg-primary/10 hover:text-primary transition-colors border border-border/50 font-medium"
+                >
+                  Milestones
+                </Link>
+                <Link
+                  href="/about-us"
+                  className="p-2 rounded-xl bg-background/50 hover:bg-primary/10 hover:text-primary transition-colors border border-border/50 font-medium"
+                >
+                  About Us
+                </Link>
               </div>
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>

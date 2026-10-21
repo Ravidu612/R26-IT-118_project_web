@@ -2,20 +2,20 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Maximize2, X } from "lucide-react";
+import { Maximize2, X, Image as ImageIcon } from "lucide-react";
 
 export function GallerySection() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
 
   const images = [
-    { title: "Tea plantation", src: "/gallery/tea-plantation.jpg" },
-    { title: "Research meetings", src: "/gallery/research-meetings.jpg" },
-    { title: "Dataset collection", src: "/gallery/dataset-collection.jpg" },
-    { title: "Field visits", src: "/gallery/field-visits.jpg" },
-    { title: "Model training", src: "/gallery/model-training.jpg" },
-    { title: "System screenshots", src: "/gallery/system-screenshots.jpg" },
-    { title: "Dashboard", src: "/gallery/dashboard.jpg" },
-    { title: "Graphs", src: "/gallery/graphs.jpg" }
+    { title: "Ceylon Tea Plantation", src: "/gallery/tea-plantation.jpg", category: "Field Location" },
+    { title: "Research & Supervisor Meetings", src: "/gallery/research-meetings.jpg", category: "Academic Review" },
+    { title: "Dataset Collection & Labeling", src: "/gallery/dataset-collection.jpg", category: "Data Preparation" },
+    { title: "Field Visits & Estate Observations", src: "/gallery/field-visits.jpg", category: "Field Study" },
+    { title: "AI Model Training & Loss Curves", src: "/gallery/model-training.jpg", category: "Model Development" },
+    { title: "System Architecture & Screenshots", src: "/gallery/system-screenshots.jpg", category: "System Implementation" },
+    { title: "Integrated Management Dashboard", src: "/gallery/dashboard.jpg", category: "Decision Support" },
+    { title: "Validation Analytics & Graphs", src: "/gallery/graphs.jpg", category: "Evaluation" },
   ];
 
   return (
@@ -28,12 +28,15 @@ export function GallerySection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-mono font-semibold uppercase tracking-wider mb-3">
+            <span>Visual Documentation</span>
+          </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-foreground">
-            Project <span className="text-primary">Gallery</span>
+            Research <span className="text-primary">Gallery</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full mb-8" />
-          <p className="text-lg text-foreground/70">
-            A visual journey through our research, from field visits to final system implementation.
+          <p className="text-base md:text-lg text-foreground/70">
+            A visual record of our research process — including estate field visits, dataset collection, model training, and prototype dashboard development.
           </p>
         </motion.div>
 
@@ -41,63 +44,79 @@ export function GallerySection() {
           {images.map((img, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="relative aspect-square rounded-2xl overflow-hidden group cursor-pointer border border-border/50 shadow-sm hover:shadow-xl transition-all"
-              onClick={() => setSelectedImage(img.src)}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className="relative aspect-square rounded-2xl overflow-hidden group cursor-pointer border border-border/60 shadow-sm hover:shadow-xl transition-all bg-card"
+              onClick={() => setSelectedImage({ src: img.src, title: img.title })}
             >
-              {/* Fallback image style or actual image if provided */}
-              <div className="w-full h-full bg-gradient-to-br from-background to-primary/10 flex items-center justify-center text-center relative">
-                {/* 
-                  When you upload actual images to the public/gallery folder, 
-                  uncomment the <img> tag below and remove the placeholder span.
-                */}
-                <img src={img.src} alt={img.title} className="w-full h-full object-cover absolute inset-0 z-0" onError={(e) => {
-                  // Fallback if image not found
-                  e.currentTarget.style.display = 'none';
-                  if (e.currentTarget.nextElementSibling) {
-                    (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'block';
-                  }
-                }} />
-                <span className="text-foreground/40 font-medium z-10 relative px-6 hidden" style={{ display: 'block' }}>{img.title} Placeholder</span>
+              <div className="w-full h-full relative overflow-hidden bg-foreground/5 flex items-center justify-center">
+                <img
+                  src={img.src}
+                  alt={img.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    target.style.display = "none";
+                    const fallback = target.nextElementSibling as HTMLElement;
+                    if (fallback) fallback.style.display = "flex";
+                  }}
+                />
+                {/* Fallback displayed only if image fails */}
+                <div className="hidden flex-col items-center justify-center p-4 text-center text-foreground/60">
+                  <ImageIcon className="w-8 h-8 text-primary/60 mb-2" />
+                  <span className="text-xs font-medium">{img.title}</span>
+                </div>
               </div>
 
-              <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center backdrop-blur-sm">
-                <Maximize2 className="w-8 h-8 text-white mb-2" />
-                <span className="text-white font-semibold">{img.title}</span>
+              {/* Hover overlay with title and category */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-5">
+                <span className="text-[11px] font-mono text-emerald-300 font-semibold uppercase tracking-wider mb-1">
+                  {img.category}
+                </span>
+                <span className="text-white font-bold text-sm leading-snug flex items-center justify-between">
+                  <span>{img.title}</span>
+                  <Maximize2 className="w-4 h-4 text-white/80 shrink-0 ml-2" />
+                </span>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-md">
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-md"
+          onClick={() => setSelectedImage(null)}
+        >
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white p-2 glass rounded-full"
+            className="absolute top-6 right-6 text-white/80 hover:text-white p-2.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-20"
+            aria-label="Close image viewer"
           >
             <X className="w-6 h-6" />
           </button>
 
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="max-w-5xl w-full aspect-video bg-gradient-to-br from-zinc-800 to-zinc-900 rounded-2xl flex items-center justify-center border border-white/10"
+            exit={{ scale: 0.92, opacity: 0 }}
+            className="relative max-w-5xl w-full max-h-[85vh] rounded-2xl overflow-hidden border border-white/15 bg-zinc-950 flex flex-col shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* 
-                Similarly, uncomment this image tag for the fullscreen view when you have the images 
-            */}
-            <img src={selectedImage} alt="Fullscreen view" className="w-full h-full object-contain absolute inset-0 z-0" onError={(e) => {
-              e.currentTarget.style.display = 'none';
-              if (e.currentTarget.nextElementSibling) {
-                (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'block';
-              }
-            }} />
-            <span className="text-white/50 text-2xl font-medium z-10 relative hidden" style={{ display: 'block' }}>Image Placeholder Fullscreen</span>
+            <div className="relative flex-1 flex items-center justify-center p-2 min-h-[350px]">
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.title}
+                className="max-h-[75vh] w-auto max-w-full object-contain rounded-lg"
+              />
+            </div>
+            <div className="bg-zinc-900/90 px-6 py-4 border-t border-white/10 flex items-center justify-between">
+              <h4 className="text-white font-semibold text-base">{selectedImage.title}</h4>
+              <span className="text-xs text-white/50 font-mono">TeaGuard Research Documentation</span>
+            </div>
           </motion.div>
         </div>
       )}
