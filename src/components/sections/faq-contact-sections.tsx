@@ -146,6 +146,9 @@ export function ContactSection() {
 
     setStatus("loading");
 
+    let sent = false;
+
+    // 1. Try server-side API endpoint first (Resend backend)
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -153,20 +156,49 @@ export function ContactSection() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to send message.");
+      if (res.ok) {
+        sent = true;
       }
+    } catch {
+      // Server API unreachable or unconfigured; proceed to EmailJS
+    }
 
+    // 2. If server API failed or unconfigured, dispatch via EmailJS
+    const emailJsService = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_54bkpbq";
+    const emailJsTemplate = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_ijsgot1";
+    const emailJsKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "xO5DxHSvxrpnXWxri";
+
+    if (!sent && emailJsService && emailJsTemplate && emailJsKey) {
+      try {
+        const emailjs = (await import("@emailjs/browser")).default;
+        await emailjs.send(
+          emailJsService,
+          emailJsTemplate,
+          {
+            from_name: formData.name.trim(),
+            name: formData.name.trim(),
+            from_email: formData.email.trim(),
+            email: formData.email.trim(),
+            subject: formData.subject.trim(),
+            message: formData.message.trim(),
+            reply_to: formData.email.trim(),
+            to_email: "ravidu612@gmail.com",
+          },
+          emailJsKey
+        );
+        sent = true;
+      } catch (emailJsErr) {
+        console.warn("EmailJS fallback warning:", emailJsErr);
+      }
+    }
+
+    if (sent) {
       setStatus("success");
       setFormData({ name: "", email: "", subject: "TeaGuard Project Inquiry", message: "" });
-    } catch (err: any) {
-      console.warn("Contact form notice:", err);
+    } else {
       setStatus("error");
       setErrorMsg(
-        err.message ||
-          "Direct message dispatch is currently offline. Please use the direct email link below."
+        "Direct email dispatch is currently experiencing connection issues. Please use the direct mailto link below to email ravidu612@gmail.com directly."
       );
     }
   };

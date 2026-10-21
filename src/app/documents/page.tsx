@@ -163,6 +163,18 @@ export default function DocumentsPage() {
       description: "Official research log book recording tea grading sample imaging, CNN feature extraction, and factory data collection.",
       fileSize: "26.8 MB",
     },
+
+    {
+      id: "log-5",
+      title: "Teams Check List",
+      category: "Checklists & Assessment",
+      authorOrScope: "MS Teams Check List",
+      date: "2026",
+      file: "R26-IT-118.xlsx",
+      status: "Available",
+      description: "MS Teams Checklist.",
+      fileSize: "189 KB",
+    },
     // Final Documentation (Pending / In Preparation per PDF slide 12)
     {
       id: "final-main",
