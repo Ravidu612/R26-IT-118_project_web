@@ -90,7 +90,8 @@ export default function PresentationsPage() {
       stage: "Final Viva Voce",
       title: "Final Presentation & System Demonstration",
       date: "November 2026 (Scheduled)",
-      status: "In Preparation",
+      status: "Completed",
+      file: "TeaGuard_AI_Final_Viva.pdf",
       description:
         "Final academic defense and live system demonstration for external and internal examiners. Covers full system validation with Wewawatte Estates Co., commercial readiness, and future research directions.",
       highlights: [

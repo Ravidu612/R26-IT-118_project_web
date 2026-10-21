@@ -170,8 +170,10 @@ export default function DocumentsPage() {
       category: "Final Documentation",
       authorOrScope: "Group R26-IT-118",
       date: "Final Assessment Period (November 2026)",
-      status: "In Preparation",
+      file: "R26-IT-118_Common.pdf",
+      status: "Available",
       description: "Complete final thesis incorporating introduction, comprehensive literature review, unified system architecture, experimental results, and conclusions.",
+      fileSize: "1.25 MB",
     },
     {
       id: "final-ch1",
@@ -179,8 +181,11 @@ export default function DocumentsPage() {
       category: "Final Documentation",
       authorOrScope: "Miuranga W.A.R (IT22209320)",
       date: "November 2026",
-      status: "In Preparation",
+      file: "IT22209320_DRAFT.pdf",
+      status: "Available",
       description: "Individual dissertation chapter focusing on YOLOv8s computer vision disease identification and treatment advisory engine.",
+      fileSize: "1.58 MB",
+
     },
     {
       id: "final-ch2",
@@ -188,8 +193,11 @@ export default function DocumentsPage() {
       category: "Final Documentation",
       authorOrScope: "Gunasekara L.M.N.P (IT22267986)",
       date: "November 2026",
-      status: "In Preparation",
+      file: "Individual Thesis Content nethmi-2.pdf",
+      status: "Available",
       description: "Individual dissertation chapter detailing IoT wearable stress telemetry and workforce scheduling algorithms.",
+      fileSize: "1.16 MB",
+
     },
     {
       id: "final-ch3",
@@ -197,8 +205,11 @@ export default function DocumentsPage() {
       category: "Final Documentation",
       authorOrScope: "Gunasekara G.N.D (IT22279620)",
       date: "November 2026",
-      status: "In Preparation",
+      file: "Gunasekara_GND_IT22279620_Weather_Intelligence_Thesis.pdf",
+      status: "Available",
       description: "Individual dissertation chapter on regional micro-climate forecasting and tea disease outbreak risk estimation.",
+      fileSize: "50.9 KB",
+
     },
     {
       id: "final-ch4",
@@ -206,8 +217,10 @@ export default function DocumentsPage() {
       category: "Final Documentation",
       authorOrScope: "Pathirana I.M (IT22282668)",
       date: "November 2026",
-      status: "In Preparation",
+      file: "Final Report - Induni.pdf",
+      status: "Available",
       description: "Individual dissertation chapter evaluating ConvNeXtV2-Tiny optical tea classification and factory validation.",
+      fileSize: "1.72 MB",
     },
   ];
 
@@ -268,11 +281,10 @@ export default function DocumentsPage() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    selectedCategory === cat
-                      ? "bg-primary text-primary-foreground font-semibold shadow-xs"
-                      : "bg-background text-foreground/70 hover:bg-foreground/5 hover:text-foreground border border-border/60"
-                  }`}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${selectedCategory === cat
+                    ? "bg-primary text-primary-foreground font-semibold shadow-xs"
+                    : "bg-background text-foreground/70 hover:bg-foreground/5 hover:text-foreground border border-border/60"
+                    }`}
                 >
                   {cat}
                 </button>

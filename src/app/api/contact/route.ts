@@ -5,14 +5,21 @@ import { NextResponse } from "next/server";
 const RECIPIENT_EMAIL = "ravidu612@gmail.com";
 
 export async function POST(request: Request) {
-  // Instantiate inside handler so it only runs at request time, not build time
-  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const { name, email, subject, message } = await request.json();
 
     if (!name || !email || !subject || !message) {
       return NextResponse.json({ error: "All fields are required." }, { status: 400 });
     }
+
+    if (!process.env.RESEND_API_KEY) {
+      return NextResponse.json(
+        { error: "Email backend is currently unconfigured. Please send your message directly to ravidu612@gmail.com." },
+        { status: 503 }
+      );
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const { data, error } = await resend.emails.send({
       from: "TeaGuard Contact Form <onboarding@resend.dev>",
@@ -21,7 +28,7 @@ export async function POST(request: Request) {
       subject: `[TeaGuard Contact] ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f9f9f9; padding: 32px; border-radius: 12px;">
-          <h2 style="color: #16a34a; margin-bottom: 4px;">New message via TeaGuard Website</h2>
+          <h2 style="color: #16a34a; margin-bottom: 4px;">New message via TeaGuard Research Website</h2>
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin-bottom: 24px;" />
 
           <table style="width: 100%; border-collapse: collapse;">
@@ -45,7 +52,7 @@ export async function POST(request: Request) {
           </div>
 
           <p style="margin-top: 24px; font-size: 12px; color: #9ca3af;">
-            This message was sent from the TeaGuard Research Website contact form.
+            This message was sent from the TeaGuard Research Website contact form (R26-IT-118).
           </p>
         </div>
       `,
@@ -53,12 +60,12 @@ export async function POST(request: Request) {
 
     if (error) {
       console.error("Resend error:", error);
-      return NextResponse.json({ error: "Failed to send email." }, { status: 500 });
+      return NextResponse.json({ error: "Failed to dispatch email via provider." }, { status: 500 });
     }
 
     return NextResponse.json({ success: true, id: data?.id });
   } catch (err) {
     console.error("Contact API error:", err);
-    return NextResponse.json({ error: "Internal server error." }, { status: 500 });
+    return NextResponse.json({ error: "Internal server error occurred." }, { status: 500 });
   }
 }

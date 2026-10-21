@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users2, Leaf, CloudRain, Factory, ArrowRight, CheckCircle2, Cpu, Activity, CpuIcon, AlertCircle, ShieldAlert } from "lucide-react";
+import { Users2, Leaf, CloudRain, Factory, ArrowRight, CheckCircle2, Cpu, Activity, AlertCircle, ShieldCheck } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 export function ResearchComponents() {
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -12,9 +13,11 @@ export function ResearchComponents() {
       id: "01",
       title: "Tea Leaf Disease Detection & Pattern Analysis",
       subtitle: "YOLOv8s Computer Vision Engine",
-      model: "YOLOv8s",
+      model: "YOLOv8s (mAP@0.5: 96.1%)",
       badge: "Vision AI",
-      description: "An image-based computer vision module that detects tea leaf diseases from uploaded images using YOLOv8s and provides confidence-based disease information and treatment-oriented recommendations.",
+      researcher: "Miuranga W.A.R (IT22209320)",
+      isLeadComponent: true,
+      description: "An image-based computer vision module that detects tea leaf diseases from field images using YOLOv8s, calculates confidence scores, and provides immediate agronomic treatment recommendations.",
       pipeline: ["Tea Leaf Image", "Image Processing", "YOLOv8s", "Disease Detection", "Disease Class", "Confidence Score", "Treatment Recommendation", "Dashboard"],
       classes: ["Anthracnose", "Algal Leaf", "Bird Eye Spot", "Blister Blight", "Grey Blight", "Red Rust"],
       metrics: [
@@ -33,6 +36,8 @@ export function ResearchComponents() {
       subtitle: "LightGBM & Physiological IoT Wearable Prototype",
       model: "LightGBM Classifier + ESP32-S3",
       badge: "Workforce & IoT",
+      researcher: "Gunasekara L.M.N.P (IT22267986)",
+      isLeadComponent: false,
       description: "Combines worker task management with an IoT physiological wearable prototype (ESP32-S3 + MAX30102) measuring Heart Rate & SpO₂ to classify worker condition and stress levels.",
       prototypeNotice: "Research prototype for non-invasive worker welfare monitoring",
       components: [
@@ -56,6 +61,8 @@ export function ResearchComponents() {
       subtitle: "Gradient Boosting & Multi-Output Random Forest",
       model: "Gradient Boosting + Multi-output Random Forest",
       badge: "Climate AI",
+      researcher: "Gunasekara G.N.D (IT22279620)",
+      isLeadComponent: false,
       description: "Integrates historical weather data and OpenWeatherMap API telemetries (Temp, Humidity, Rainfall, Wind Speed) to generate 8-hour regional forecasts and predict disease infection risks.",
       regions: ["Nuwara Eliya", "Kandy", "Ratnapura"],
       outcomes: ["Irrigation Recommendation", "Fertilizer Recommendation", "Harvest Planning", "Disease Prevention"],
@@ -75,6 +82,8 @@ export function ResearchComponents() {
       subtitle: "ConvNeXtV2-Tiny Optical Vision Classifier",
       model: "convnextv2_tiny.fcmae_ft_in22k_in1k",
       badge: "Optical Vision",
+      researcher: "Pathirana I.M (IT22282668)",
+      isLeadComponent: false,
       description: "Automates factory tea classification from processed tea images using ConvNeXtV2-Tiny to classify tea into 8 industry grades with high fidelity and confidence scoring.",
       pipeline: ["Image Upload", "Preprocessing", "ConvNeXtV2-Tiny", "Feature Representation", "Classification", "Tea Grade", "Confidence", "Dashboard"],
       classes: ["BM", "BOP", "BP", "BROKEN_TEA", "DUST", "FANNING_2", "PF", "PW_DUST"],
@@ -102,12 +111,12 @@ export function ResearchComponents() {
           className="text-left max-w-3xl mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-mono font-semibold uppercase tracking-wider mb-4 border border-primary/20">
-            <span>Research Implementation</span>
+            <span>Core Research Pillars</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4">
             Four Intelligent <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-emerald-500 to-accent">Research Modules</span>
           </h2>
-          <p className="text-lg text-foreground/75 font-normal leading-relaxed">
+          <p className="text-base md:text-lg text-foreground/75 font-normal leading-relaxed">
             Detailed breakdown of models, pipelines, hardware, and empirical metrics powering the TeaGuard Decision Support System.
           </p>
         </motion.div>
@@ -121,7 +130,7 @@ export function ResearchComponents() {
               <button
                 key={mod.id}
                 onClick={() => setActiveTab(idx)}
-                className={`flex items-center gap-3 px-5 py-3 rounded-2xl font-medium text-sm transition-all duration-300 border ${
+                className={`flex items-center gap-3 px-5 py-3 rounded-2xl font-medium text-xs md:text-sm transition-all duration-300 border ${
                   isActive
                     ? "bg-primary text-primary-foreground border-primary shadow-lg scale-[1.02]"
                     : "glass text-foreground/75 border-border hover:border-primary/40 hover:text-foreground"
@@ -130,6 +139,11 @@ export function ResearchComponents() {
                 <Icon className="w-4 h-4" />
                 <span className="font-bold font-mono">Module {mod.id}</span>
                 <span className="hidden sm:inline text-xs opacity-80">| {mod.badge}</span>
+                {mod.isLeadComponent && (
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold hidden md:inline">
+                    Lead
+                  </span>
+                )}
               </button>
             );
           })}
@@ -148,19 +162,34 @@ export function ResearchComponents() {
               className={`glass-panel p-8 md:p-10 rounded-3xl border bg-gradient-to-br ${mod.color} relative overflow-hidden`}
             >
               {/* Header Info */}
-              <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
+              <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
                     <div className={`p-3 rounded-2xl ${mod.accent}`}>
                       <Icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <span className="text-xs font-mono font-bold text-foreground/50 uppercase">Module {mod.id} · {mod.badge}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-mono font-bold text-foreground/50 uppercase">
+                          Module {mod.id} · {mod.badge}
+                        </span>
+                        {mod.isLeadComponent && (
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-bold border border-emerald-500/30">
+                            Lead Individual Component
+                          </span>
+                        )}
+                      </div>
                       <h3 className="text-2xl md:text-3xl font-extrabold text-foreground">{mod.title}</h3>
                     </div>
                   </div>
-                  <div className="inline-block px-3 py-1 rounded-lg bg-foreground/5 text-primary text-xs font-mono font-semibold border border-border/40 mt-1">
-                    PRIMARY MODEL: {mod.model}
+
+                  <div className="flex flex-wrap items-center gap-2 mt-2">
+                    <span className="px-3 py-1 rounded-lg bg-foreground/5 text-primary text-xs font-mono font-semibold border border-border/40">
+                      PRIMARY MODEL: {mod.model}
+                    </span>
+                    <span className="px-3 py-1 rounded-lg bg-foreground/5 text-foreground/70 text-xs font-mono border border-border/40">
+                      Researcher: {mod.researcher}
+                    </span>
                   </div>
                 </div>
 
@@ -187,8 +216,6 @@ export function ResearchComponents() {
                 </div>
               )}
 
-              {/* Specific Details based on Module */}
-
               {/* Pipeline Step Flow */}
               {mod.pipeline && (
                 <div className="mb-8 pt-6 border-t border-border/30">
@@ -198,50 +225,12 @@ export function ResearchComponents() {
                   <div className="flex flex-wrap items-center gap-2">
                     {mod.pipeline.map((pStep, pIdx) => (
                       <div key={pIdx} className="flex items-center gap-2">
-                        <div className="px-3 py-1.5 rounded-xl bg-background/80 text-foreground text-xs font-mono font-semibold border border-border/40 shadow-sm">
+                        <span className="px-3 py-1.5 rounded-xl bg-background/80 border border-border text-xs font-mono font-medium text-foreground">
                           {pStep}
-                        </div>
-                        {pIdx < mod.pipeline.length - 1 && <ArrowRight className="w-3.5 h-3.5 text-primary shrink-0" />}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Component Split for Module 02 */}
-              {mod.components && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 pt-6 border-t border-border/30">
-                  {mod.components.map((c, cIdx) => (
-                    <div key={cIdx} className="glass p-6 rounded-2xl border border-border/40 bg-background/50">
-                      <h4 className="font-bold text-sm text-primary uppercase font-mono tracking-wider mb-3">
-                        {c.name}
-                      </h4>
-                      <ul className="space-y-2">
-                        {c.items.map((item, iIdx) => (
-                          <li key={iIdx} className="flex items-center gap-2 text-xs font-medium text-foreground/80">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* IoT Diagram for Module 02 */}
-              {mod.iotDiagram && (
-                <div className="mb-8 pt-4">
-                  <div className="text-xs font-mono font-bold text-foreground/50 uppercase tracking-widest mb-3">
-                    IoT Wearable Data Flow (ESP32-S3 + MAX30102)
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    {mod.iotDiagram.map((step, sIdx) => (
-                      <div key={sIdx} className="flex items-center gap-2">
-                        <div className="px-3 py-1.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-mono font-bold border border-blue-500/20">
-                          {step}
-                        </div>
-                        {sIdx < mod.iotDiagram.length - 1 && <ArrowRight className="w-3.5 h-3.5 text-blue-500 shrink-0" />}
+                        </span>
+                        {pIdx < mod.pipeline.length - 1 && (
+                          <ArrowRight className="w-3.5 h-3.5 text-primary shrink-0 opacity-60" />
+                        )}
                       </div>
                     ))}
                   </div>
@@ -279,6 +268,17 @@ export function ResearchComponents() {
                 </div>
               )}
 
+              {/* Link to Full Domain Page */}
+              <div className="pt-6 mt-6 border-t border-border/40 flex items-center justify-between">
+                <Link
+                  href="/domain"
+                  className="text-xs font-bold text-primary hover:underline inline-flex items-center gap-1.5"
+                >
+                  <span>Read Full Methodology & Theoretical Background in Domain</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                <span className="text-[11px] font-mono text-foreground/50">Verified in TAF & Research Paper</span>
+              </div>
             </motion.div>
           );
         })}
