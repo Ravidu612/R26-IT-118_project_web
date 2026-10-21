@@ -16,7 +16,12 @@ import {
   Copy,
   Check,
 } from "lucide-react";
+import emailjs from "@emailjs/browser";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_54bkpbq";
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_ijsgot1";
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "xO5DxHSvxrpnXWxri";
 
 interface EmailTemplate {
   name: string;
@@ -110,6 +115,9 @@ export default function ContactUsPage() {
     setStatus("loading");
     setErrorMsg("");
 
+    let sent = false;
+
+    // 1. Try server-side API endpoint first (Resend backend)
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -117,21 +125,44 @@ export default function ContactUsPage() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to dispatch message.");
+      if (response.ok) {
+        sent = true;
       }
+    } catch {
+      // Server API unreachable or unconfigured; proceed to EmailJS
+    }
 
+    // 2. If server API not configured or failed, send via EmailJS
+    if (!sent && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY) {
+      try {
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          {
+            from_name: formData.name.trim(),
+            name: formData.name.trim(),
+            from_email: formData.email.trim(),
+            email: formData.email.trim(),
+            subject: formData.subject.trim(),
+            message: formData.message.trim(),
+            reply_to: formData.email.trim(),
+            to_email: "ravidu612@gmail.com",
+          },
+          EMAILJS_PUBLIC_KEY
+        );
+        sent = true;
+      } catch (emailJsErr) {
+        console.warn("EmailJS fallback warning:", emailJsErr);
+      }
+    }
+
+    if (sent) {
       setStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch (err: any) {
-      console.warn("Backend API notice:", err);
-      // Fallback behavior: notify user clearly and allow mailto backup
+    } else {
       setStatus("error");
       setErrorMsg(
-        err.message ||
-          "Direct email service could not complete delivery. Please use the direct email link below to send your message."
+        "Direct email dispatch is currently experiencing connection issues. Please use the direct mailto link below to email ravidu612@gmail.com directly."
       );
     }
   };
